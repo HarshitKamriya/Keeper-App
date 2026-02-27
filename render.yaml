@@ -1,0 +1,21 @@
+# https://render.com/docs/blueprint-spec
+databases:
+  - name: keeper-notes-db
+    plan: free
+    databaseName: keeper_notes
+    user: keeper_user
+
+services:
+  - type: web
+    name: keeper-app
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build && cd server && npm install
+    startCommand: cd server && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: keeper-notes-db
+          property: connectionString
