@@ -10,7 +10,7 @@ services:
     name: keeper-app
     runtime: node
     plan: free
-    buildCommand: export NODE_ENV=development && npm install && export NODE_ENV=production && npm run build && cd server && npm install
+    buildCommand: npm install && npm run build && cd server && npm install
     startCommand: cd server && node server.js
     envVars:
       - key: NODE_ENV
